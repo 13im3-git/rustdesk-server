@@ -1,8 +1,8 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 
 const router = Router();
 
-router.get("/", (_req: express.Request, res: express.Response) => {
+router.get("/", (_req: Request, res: Response) => {
   // connections are stored client-side in localStorage for now
   res.json({
     connections: [],
@@ -10,10 +10,11 @@ router.get("/", (_req: express.Request, res: express.Response) => {
   });
 });
 
-router.post("/", (req: express.Request, res: express.Response) => {
+router.post("/", (req: Request, res: Response): void => {
   const { sourceId, targetId } = req.body;
   if (!sourceId || !targetId || sourceId === targetId) {
-    return res.status(400).json({ error: "Invalid connection" });
+    res.status(400).json({ error: "Invalid connection" });
+    return;
   }
   const conn = {
     id: crypto.randomUUID(),
@@ -24,7 +25,7 @@ router.post("/", (req: express.Request, res: express.Response) => {
   res.status(201).json(conn);
 });
 
-router.delete("/:id", (_req: express.Request, res: express.Response) => {
+router.delete("/:id", (_req: Request, res: Response) => {
   res.json({ deleted: true });
 });
 

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 
 const router = Router();
 
@@ -27,7 +27,7 @@ async function tailscaleRequest(endpoint: string): Promise<any> {
   return res.json();
 }
 
-router.get("/", async (_req: express.Request, res: express.Response) => {
+router.get("/", async (_req: Request, res: Response) => {
   try {
     const devices = await tailscaleRequest("devices");
     res.json(devices);
@@ -36,7 +36,7 @@ router.get("/", async (_req: express.Request, res: express.Response) => {
   }
 });
 
-router.get("/:id", async (req: express.Request, res: express.Response) => {
+router.get("/:id", async (req: Request, res: Response) => {
   try {
     const device = await tailscaleRequest(`devices/${req.params.id}`);
     res.json(device);

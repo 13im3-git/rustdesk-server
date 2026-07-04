@@ -1,9 +1,8 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import devicesRouter from "./routes/devices.js";
 import connectionsRouter from "./routes/connections.js";
-import healthRouter from "./routes/health.js";
 
 dotenv.config();
 
@@ -12,7 +11,7 @@ const app = express();
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
 app.use(express.json());
 
-app.get("/api/health", (_req: express.Request, res: express.Response) => {
+app.get("/api/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 

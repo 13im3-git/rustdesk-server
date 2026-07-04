@@ -10,7 +10,7 @@ FROM node:20-slim AS server-builder
 
 WORKDIR /app/server
 COPY server/package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 COPY server/ ./
 RUN npm run build
 
