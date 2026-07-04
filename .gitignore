@@ -1,7 +1,10 @@
 node_modules/
 dist/
 .env
+.env.example
 .env.local
+server/.env.example
+server/.env
 *.log
 .DS_Store
 .vscode/
